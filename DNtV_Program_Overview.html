@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doanh Nghiệp Thịnh Vượng — KindSight Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: #374151; background: #fff; font-size: 15px; line-height: 1.65; }
+
+  /* ─── CSS VARIABLES ─── */
+  :root {
+    --navy: #1F3864;
+    --blue: #2E5F9E;
+    --amber: #C65911;
+    --sky: #EEF4FF;
+    --white: #FFFFFF;
+    --text: #374151;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(31, 56, 100, 0.97);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-brand { color: #fff; font-weight: 700; font-size: 14px; letter-spacing: 0.03em; }
+  .nav-brand span { color: #C65911; }
+  .nav-links { display: flex; gap: 0.25rem; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 13px; font-weight: 500; padding: 6px 14px;
+    border-radius: 6px; transition: all 0.2s;
+  }
+  .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.12); }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 72px 0; }
+  section:nth-child(even) { background: #F9FAFB; }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header { margin-bottom: 2.5rem; }
+  .section-header h2 {
+    font-size: 1.75rem; font-weight: 800; color: var(--navy);
+    padding-left: 16px;
+    border-left: 4px solid var(--amber);
+    border-radius: 0;
+    line-height: 1.3;
+  }
+  .section-header p { color: var(--text-muted); margin-top: 8px; padding-left: 20px; font-size: 0.95rem; }
+
+  /* ─���─ HERO ─── */
+  #hero {
+    background: linear-gradient(135deg, #1F3864 0%, #2E5F9E 100%);
+    padding: 120px 0 80px; color: #fff; text-align: center;
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.9); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em; padding: 5px 16px; border-radius: 20px;
+    margin-bottom: 1.5rem; text-transform: uppercase;
+  }
+  #hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800;
+    letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 1.25rem;
+    color: #fff;
+  }
+  #hero h1 span { color: #FBBF24; }
+  .hero-sub {
+    font-size: 1.05rem; color: rgba(255,255,255,0.85);
+    max-width: 640px; margin: 0 auto 3rem; line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center; max-width: 760px; margin: 0 auto;
+  }
+  .stat-chip {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 10px; padding: 12px 20px;
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.2s;
+  }
+  .stat-chip:hover { background: rgba(255,255,255,0.2); }
+  .stat-chip .chip-icon { font-size: 1.5rem; }
+  .stat-chip .chip-val { font-size: 1rem; font-weight: 700; color: #fff; }
+  .stat-chip .chip-label { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-top: 1px; }
+
+  /* ─── GOAL CARDS ─── */
+  .goals-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  .goal-card {
+    background: #fff; border: 1px solid var(--border);
+    border-top: 4px solid var(--amber);
+    border-radius: var(--radius-lg); padding: 1.5rem 1.25rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .goal-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(31,56,100,0.12); }
+  .goal-card .goal-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+  .goal-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .goal-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* ─── FRAMEWORKS ACCORDION ─── */
+  .frameworks-section { margin-top: 2.75rem; }
+  .frameworks-section-title {
+    font-size: 0.88rem; font-weight: 700; color: var(--navy);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 1rem; padding-left: 4px;
+  }
+  .frameworks-section-title::before { content: ""; display: inline-block; width: 3px; height: 16px; background: var(--amber); border-radius: 2px; flex-shrink: 0; }
+  .accordion { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 2px 8px rgba(31,56,100,0.06); }
+  .acc-item { border-bottom: 1px solid var(--border); }
+  .acc-item:last-child { border-bottom: none; }
+  .acc-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem; cursor: pointer;
+    background: #fff; transition: background 0.18s;
+    gap: 12px; user-select: none;
+  }
+  .acc-header:hover { background: var(--sky); }
+  .acc-header.is-open { background: var(--sky); }
+  .acc-header-left { display: flex; align-items: center; gap: 12px; }
+  .acc-goal-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .acc-goal-name { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+  .acc-goal-sub { font-size: 0.77rem; color: var(--text-muted); margin-top: 2px; }
+  .acc-chevron { color: var(--blue); font-size: 1rem; transition: transform 0.28s; flex-shrink: 0; line-height: 1; }
+  .acc-chevron.is-open { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 1.5rem; background: #F8FAFF; border-top: 1px solid var(--border); }
+  .acc-body.is-open { display: block; }
+
+  .fw-label {
+    font-size: 0.73rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; margin-bottom: 0.6rem; margin-top: 1.25rem;
+  }
+  .fw-label:first-child { margin-top: 0; }
+  .fw-label.lbl-dci { color: var(--amber); }
+  .fw-label.lbl-tools { color: var(--blue); }
+  .fw-label.lbl-note { color: #7C3AED; }
+  .fw-dci-box {
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFF1E0 100%);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 10px 14px; font-size: 0.83rem; color: #6B3A0A;
+    line-height: 1.65; margin-bottom: 1rem;
+  }
+  .fw-tools-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .fw-tool {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px 14px;
+    transition: box-shadow 0.18s, border-color 0.18s;
+  }
+  .fw-tool:hover { box-shadow: 0 4px 14px rgba(31,56,100,0.10); border-color: #C7D9F7; }
+  .fw-tool-name { font-size: 0.82rem; font-weight: 700; color: var(--blue); margin-bottom: 5px; }
+  .fw-tool-desc { font-size: 0.77rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 6px; }
+  .fw-tool-apply { font-size: 0.74rem; color: var(--amber); font-weight: 600; display: flex; align-items: flex-start; gap: 4px; }
+  .fw-tool-apply::before { content: "→"; flex-shrink: 0; }
+  .fw-note-box {
+    background: linear-gradient(135deg, #F3F0FF 0%, #EBE6FF 100%);
+    border: 1px solid #D4C8FF;
+    border-radius: var(--radius); padding: 10px 14px;
+    font-size: 0.81rem; color: #4A3080; line-height: 1.6;
+    margin-top: 1.25rem;
+  }
+  .fw-note-box strong { color: #3B2070; }
+  @media (max-width: 900px) { .fw-tools-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .fw-tools-grid { grid-template-columns: 1fr; } }
+
+  /* ─── TRANSFORMATION TABLE ─── */
+  .transform-table { width: 100%; border-collapse: collapse; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .transform-table th { background: var(--navy); color: #fff; padding: 14px 18px; font-size: 0.85rem; font-weight: 600; text-align: left; }
+  .transform-table th:first-child { width: 140px; }
+  .transform-table td { padding: 16px 18px; font-size: 0.88rem; vertical-align: top; border-bottom: 1px solid var(--border); }
+  .transform-table tr:last-child td { border-bottom: none; }
+  .transform-table .col-criteria { font-weight: 700; color: var(--navy); font-size: 0.88rem; }
+  .transform-table .col-before { background: #FFF3E0; }
+  .transform-table .col-after { background: #E8F5E9; }
+  .transform-table .col-before span { color: #C65911; }
+  .transform-table .col-after span { color: #2E7D32; }
+
+  /* ─── ROADMAP TIMELINE ─── */
+  .timeline-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
+  }
+  .month-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s; position: relative;
+  }
+  .month-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(31,56,100,0.12); }
+  .month-header {
+    padding: 14px 14px 12px; color: #fff; position: relative;
+  }
+  .month-header .month-num { font-size: 0.7rem; font-weight: 700; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .month-header h3 { font-size: 0.85rem; font-weight: 700; line-height: 1.3; }
+  .month-badge {
+    display: inline-block; background: var(--amber); color: #fff;
+    font-size: 0.65rem; font-weight: 700; padding: 2px 7px;
+    border-radius: 4px; margin-top: 6px; text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .month-badge.audit { background: #7C3AED; }
+  .month-body { padding: 12px 14px; }
+  .month-body ul { list-style: none; }
+  .month-body ul li {
+    font-size: 0.78rem; color: var(--text); padding: 4px 0;
+    border-bottom: 1px dashed var(--border);
+    display: flex; align-items: flex-start; gap: 6px; line-height: 1.45;
+  }
+  .month-body ul li:last-child { border-bottom: none; }
+  .month-body ul li::before { content: "•"; color: var(--blue); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .month-footer { padding: 8px 14px 12px; font-size: 0.72rem; color: var(--text-muted); border-top: 1px solid var(--border); background: #F9FAFB; }
+
+  /* Month colors */
+  .m1 .month-header, .m6 .month-header { background: var(--navy); }
+  .m2 .month-header, .m3 .month-header, .m5 .month-header { background: var(--blue); }
+  .m4 .month-header { background: var(--amber); }
+
+  /* ─── 5 STARS TABLE ─── */
+  .stars-table { width: 100%; border-collapse: collapse; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .stars-table th { background: var(--navy); color: #fff; padding: 14px 18px; font-size: 0.85rem; font-weight: 600; text-align: left; }
+  .stars-table th:first-child { width: 170px; }
+  .stars-table td { padding: 16px 18px; font-size: 0.87rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+  .stars-table tr:last-child td { border-bottom: none; }
+  .stars-table tr:nth-child(even) td { background: #F0F4FA; }
+  .stars-table tr:nth-child(odd) td { background: #fff; }
+  .partner-name { font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 8px; }
+  .partner-icon { font-size: 1.3rem; }
+
+  /* ─── METRICS ─── */
+  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .metric-card {
+    background: linear-gradient(135deg, #EEF4FF 0%, #E8EFFE 100%);
+    border: 1px solid #C7D9F7;
+    border-radius: var(--radius-lg); padding: 1.75rem 1.5rem;
+    text-align: center; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .metric-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(46,95,158,0.15); }
+  .metric-val { font-size: 2rem; font-weight: 800; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .metric-label { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .metric-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ─── TEAM ─── */
+  .team-section { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .team-group { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; }
+  .team-group-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.9rem; font-weight: 700; color: var(--navy);
+    margin-bottom: 1rem; padding-bottom: 10px; border-bottom: 2px solid var(--sky);
+  }
+  .team-group-title .grp-icon { font-size: 1.3rem; }
+  .team-members { display: flex; flex-wrap: wrap; gap: 8px; }
+  .member-chip {
+    background: var(--sky); color: var(--navy);
+    border: 1px solid #C7D9F7;
+    font-size: 0.82rem; font-weight: 600;
+    padding: 6px 14px; border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .member-chip:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.8);
+    text-align: center; padding: 3rem 2rem;
+  }
+  .footer-logo { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+  .footer-logo span { color: #FBBF24; }
+  .footer-tagline { font-size: 0.88rem; color: rgba(255,255,255,0.65); margin-bottom: 0.75rem; font-style: italic; }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .goals-grid { grid-template-columns: repeat(3, 1fr); }
+    .timeline-grid { grid-template-columns: repeat(3, 1fr); }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .container { padding: 0 1rem; }
+    section { padding: 48px 0; }
+    #hero { padding: 90px 1rem 60px; }
+    #hero h1 { font-size: 1.9rem; }
+    .goals-grid { grid-template-columns: repeat(2, 1fr); }
+    .timeline-grid { grid-template-columns: repeat(2, 1fr); }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .team-section { grid-template-columns: 1fr; }
+    .stars-table th:first-child { width: 120px; }
+  }
+  @media (max-width: 480px) {
+    .goals-grid { grid-template-columns: 1fr; }
+    .timeline-grid { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav>
+  <div class="nav-brand">KindSight <span>Academy</span></div>
+  <div class="nav-links">
+    <a href="#goals">Mục Tiêu</a>
+    <a href="#transform">Chuyển Hóa</a>
+    <a href="#roadmap">Lộ Trình</a>
+    <a href="#stars">5 Cánh Sao</a>
+    <a href="#metrics">Vận Hành</a>
+    <a href="#team">Đội Ngũ</a>
+  </div>
+</nav>
+
+<!-- ─── SECTION 1: HERO ─── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-badge">KindSight Academy • Chương trình Mentor 6 tháng</div>
+    <h1>DOANH NGHIỆP<br><span>THỊNH VƯỢNG</span></h1>
+    <p class="hero-sub">Tái cấu trúc tư duy lãnh đạo — Kết hợp Hệ thống Hạt Giống DCI và Quản trị Khoa học Hiện đại để chuyển hóa doanh nghiệp từ bên trong.</p>
+    <div class="hero-stats">
+      <div class="stat-chip">
+        <span class="chip-icon">🎓</span>
+        <div><div class="chip-val">6 Tháng</div><div class="chip-label">Chương trình Mentor</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">👥</span>
+        <div><div class="chip-val">14–20</div><div class="chip-label">Học Viên / Lớp</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">📅</span>
+        <div><div class="chip-val">24 Buổi</div><div class="chip-label">Tổng số buổi học</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">🏢</span>
+        <div><div class="chip-val">3 Buổi</div><div class="chip-label">Offline trực tiếp</div></div>
+      </div>
+      <div class="stat-chip">
+        <span class="chip-icon">💰</span>
+        <div><div class="chip-val">65 Triệu</div><div class="chip-label">Học phí / Học Viên</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 2: 5 MỤC TIÊU ─── -->
+<section id="goals">
+  <div class="container">
+    <div class="section-header">
+      <h2>5 Mục Tiêu Chuyển Hóa Sau 6 Tháng</h2>
+      <p>Những kết quả học viên sẽ đạt được khi hoàn thành chương trình Mentor</p>
+    </div>
+    <div class="goals-grid">
+      <div class="goal-card">
+        <span class="goal-icon">💹</span>
+        <h3>Doanh Thu Kỳ Vọng</h3>
+        <p>Chủ động kiến tạo doanh thu theo kỳ vọng bằng công cụ DCI + quản trị hiện đại</p>
+      </div>
+      <div class="goal-card">
+        <span class="goal-icon">📊</span>
+        <h3>Lợi Nhuận Tối Ưu</h3>
+        <p>Tối ưu cấu trúc chi phí, phục vụ đúng tệp khách hàng, tăng biên lợi nhuận bền vững</p>
+      </div>
+      <div class="goal-card">
+        <span class="goal-icon">💧</span>
+        <h3>Dòng Tiền Hanh Thông</h3>
+        <p>Tạo thuận lợi dòng tiền cho 5 Cánh Sao — kỷ luật quản trị tài chính thực chiến</p>
+      </div>
+      <div class="goal-card">
+        <span class="goal-icon">🤝</span>
+        <h3>Mối Quan Hệ Hòa Hợp</h3>
+        <p>Ứng dụng 10 Hạt Giống Tốt với 5 đối tác — xây mạng lưới Seed Partner cộng hưởng</p>
+      </div>
+      <div class="goal-card">
+        <span class="goal-icon">🧘</span>
+        <h3>Nội Tâm An Yên</h3>
+        <p>Lãnh đạo chuyển từ lo lắng, đối phó sang an tâm, tận hưởng việc kinh doanh</p>
+      </div>
+    </div>
+
+    <!-- ─── FRAMEWORKS ACCORDION ─── -->
+    <div class="frameworks-section">
+      <div class="frameworks-section-title">Công Cụ &amp; Framework Theo Từng Mục Tiêu</div>
+      <div class="accordion" id="fw-accordion">
+
+        <!-- GOAL 1: DOANH THU -->
+        <div class="acc-item">
+          <div class="acc-header" data-idx="0">
+            <div class="acc-header-left">
+              <span class="acc-goal-icon">💹</span>
+              <div>
+                <div class="acc-goal-name">Mục Tiêu 1 — Doanh Thu Kỳ Vọng</div>
+                <div class="acc-goal-sub">BCG · Ansoff · Value Proposition · Pricing · Sales Funnel · ICP</div>
+              </div>
+            </div>
+            <span class="acc-chevron">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="fw-label lbl-dci">Góc nhìn DCI — Hạt Giống Doanh Thu</div>
+            <div class="fw-dci-box">
+              Doanh thu không đến từ việc "đi tìm" khách hàng — mà từ hạt giống bạn đã gieo trước đó. Khi bạn trao giá trị vượt kỳ vọng cho đúng tệp khách hàng (ICP), thiết kế sản phẩm chạm đúng nỗi đau, và định giá xứng đáng với giá trị thực — doanh thu sẽ là kết quả tự nhiên, không phải điều phải chạy theo.
+            </div>
+            <div class="fw-label lbl-tools">Framework Quản Trị Hiện Đại</div>
+            <div class="fw-tools-grid">
+              <div class="fw-tool">
+                <div class="fw-tool-name">BCG Matrix</div>
+                <div class="fw-tool-desc">Phân loại danh mục sản phẩm/dịch vụ theo thị phần tương đối và tốc độ tăng trưởng thị trường</div>
+                <div class="fw-tool-apply">Ưu tiên đầu tư vào "Stars" và đánh giá "Cash Cows" đang nuôi sống doanh nghiệp</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Ansoff Matrix</div>
+                <div class="fw-tool-desc">Xác định hướng tăng trưởng: thâm nhập sâu hơn, mở thị trường mới, ra sản phẩm mới, hoặc đa dạng hóa</div>
+                <div class="fw-tool-apply">Chọn con đường ít rủi ro nhất phù hợp nguồn lực giai đoạn hiện tại</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Value Proposition Canvas</div>
+                <div class="fw-tool-desc">Khớp chính xác sản phẩm với nỗi đau (Pains), kỳ vọng (Gains), và công việc cần làm (Jobs) của khách hàng</div>
+                <div class="fw-tool-apply">Thiết kế lại giá trị cốt lõi để không cạnh tranh bằng giá</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Pricing Strategy</div>
+                <div class="fw-tool-desc">Định giá theo giá trị (value-based), neo giá tâm lý, cấu trúc gói 3 tầng (Good-Better-Best)</div>
+                <div class="fw-tool-apply">Tăng doanh thu mà không cần tăng số lượng khách hàng</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Sales Funnel &amp; Conversion</div>
+                <div class="fw-tool-desc">Win Rate theo giai đoạn, Customer Lifetime Value (CLV), phân tích tỷ lệ chuyển đổi từng bước phễu</div>
+                <div class="fw-tool-apply">Tìm điểm tắc nghẽn trong phễu bán hàng và tối ưu đúng chỗ thay vì đổ thêm ngân sách</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">ICP &amp; Customer Persona</div>
+                <div class="fw-tool-desc">Xác định Ideal Customer Profile — đặc điểm, hành vi, nỗi đau, ngữ cảnh mua hàng của tệp khách lý tưởng</div>
+                <div class="fw-tool-apply">Tập trung 80% nguồn lực vào đúng 20% tệp khách mang lại CLV cao nhất</div>
+              </div>
+            </div>
+            <div class="fw-note-box"><strong>💡 Lưu ý thiết kế chương trình:</strong> Pricing Strategy và Sales Funnel thường bị đặt nhầm vào mục "Lợi nhuận". Thực ra chúng thuộc về <em>doanh thu</em> — lợi nhuận chỉ được tối ưu sau khi doanh thu đã được kiến tạo đúng cách.</div>
+          </div>
+        </div>
+
+        <!-- GOAL 2: LỢI NHUẬN -->
+        <div class="acc-item">
+          <div class="acc-header" data-idx="1">
+            <div class="acc-header-left">
+              <span class="acc-goal-icon">📊</span>
+              <div>
+                <div class="acc-goal-name">Mục Tiêu 2 — Lợi Nhuận Tối Ưu</div>
+                <div class="acc-goal-sub">P&amp;L · COGS · Gross Margin · Break-even · ABC Inventory · CAC vs LTV</div>
+              </div>
+            </div>
+            <span class="acc-chevron">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="fw-label lbl-dci">Góc nhìn DCI — Hạt Giống Lợi Nhuận</div>
+            <div class="fw-dci-box">
+              Lợi nhuận bền vững không đến từ việc ép giá nhà cung cấp hay cắt giảm chi phí một cách thô bạo. Hạt giống thực sự là: đối xử tốt với chuỗi cung ứng, đầu tư vào năng lực đội ngũ, và loại bỏ những chi phí "vô nghĩa" không tạo giá trị. Khi bạn biết chính xác tiền ra ở đâu — bạn mới có thể chọn đúng chỗ để tối ưu.
+            </div>
+            <div class="fw-label lbl-tools">Framework Quản Trị Hiện Đại</div>
+            <div class="fw-tools-grid">
+              <div class="fw-tool">
+                <div class="fw-tool-name">P&amp;L Structure</div>
+                <div class="fw-tool-desc">Đọc và phân tích báo cáo lãi lỗ từ Revenue → Gross Profit → EBITDA → Net Profit</div>
+                <div class="fw-tool-apply">Biết chính xác lợi nhuận thực đến từ đâu — không chỉ nhìn vào doanh thu đầu vào</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">COGS Optimization</div>
+                <div class="fw-tool-desc">Phân tích chi tiết cơ cấu giá vốn hàng bán: nguyên liệu, nhân công, chi phí sản xuất trực tiếp</div>
+                <div class="fw-tool-apply">Tăng biên lợi nhuận gộp mà không cần giảm chất lượng sản phẩm/dịch vụ</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Gross Margin by Segment</div>
+                <div class="fw-tool-desc">So sánh biên lợi nhuận gộp theo từng dòng sản phẩm, phân khúc khách hàng, và kênh bán</div>
+                <div class="fw-tool-apply">Ưu tiên bán đúng thứ có margin cao nhất — không phải thứ bán được nhiều nhất</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Break-even Analysis</div>
+                <div class="fw-tool-desc">Tính điểm hòa vốn, đòn bẩy vận hành (Operating Leverage), phân tích fixed vs variable costs</div>
+                <div class="fw-tool-apply">Biết ngưỡng doanh thu tối thiểu để có lãi và mức độ nhạy cảm khi thị trường thay đổi</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">ABC Inventory Analysis</div>
+                <div class="fw-tool-desc">Phân loại hàng tồn kho: A (giá trị cao), B (trung bình), C (nhỏ lẻ) theo đóng góp doanh thu</div>
+                <div class="fw-tool-apply">Giảm vốn kẹt trong hàng tồn kho, tập trung quản lý chặt nhóm A</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">CAC vs LTV</div>
+                <div class="fw-tool-desc">Chi phí thu hút khách hàng mới (CAC) so với tổng giá trị vòng đời (LTV) — tỷ lệ LTV:CAC lý tưởng ≥ 3:1</div>
+                <div class="fw-tool-apply">Đánh giá hiệu quả marketing và quyết định ngân sách acquisition vs retention</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOAL 3: DÒNG TIỀN -->
+        <div class="acc-item">
+          <div class="acc-header" data-idx="2">
+            <div class="acc-header-left">
+              <span class="acc-goal-icon">💧</span>
+              <div>
+                <div class="acc-goal-name">Mục Tiêu 3 — Dòng Tiền Hanh Thông</div>
+                <div class="acc-goal-sub">Cash Flow · CCC · AR · AP · Capital Allocation &amp; ROI · 13-Week Forecast</div>
+              </div>
+            </div>
+            <span class="acc-chevron">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="fw-label lbl-dci">Góc nhìn DCI — Hạt Giống Dòng Tiền</div>
+            <div class="fw-dci-box">
+              Dòng tiền là nhịp thở của doanh nghiệp. Hạt giống karma tài chính tốt nhất là: minh bạch với nhà đầu tư, trả đúng hạn cho nhà cung cấp, và thu tiền đúng cam kết từ khách hàng. Khi dòng tiền hanh thông — không phải vì bạn "may mắn" mà vì bạn đã gieo đúng hạt giống ở cả 5 Cánh Sao.
+            </div>
+            <div class="fw-label lbl-tools">Framework Quản Trị Hiện Đại</div>
+            <div class="fw-tools-grid">
+              <div class="fw-tool">
+                <div class="fw-tool-name">Cash Flow Statement</div>
+                <div class="fw-tool-desc">Phân tích 3 dòng tiền: Hoạt động kinh doanh (Operating), Đầu tư (Investing), Tài chính (Financing)</div>
+                <div class="fw-tool-apply">Nhận diện chính xác dòng tiền đang tắc nghẽn ở đâu — không chỉ nhìn vào lợi nhuận kế toán</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Cash Conversion Cycle (CCC)</div>
+                <div class="fw-tool-desc">CCC = DIO + DSO − DPO. Đo lường số ngày tiền mặt bị "kẹt" trong chu kỳ vận hành</div>
+                <div class="fw-tool-apply">Rút ngắn CCC để giải phóng vốn lưu động — mà không cần vay thêm</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">AR Management</div>
+                <div class="fw-tool-desc">Quản lý công nợ phải thu: chính sách tín dụng, aging report, phân tầng khách hàng theo rủi ro thu hồi</div>
+                <div class="fw-tool-apply">Tăng tốc dòng tiền vào — tránh tình trạng "doanh thu cao mà tiền không có"</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">AP Optimization</div>
+                <div class="fw-tool-desc">Tối ưu khoản phải trả: đàm phán điều khoản thanh toán, early payment discount, batching payments</div>
+                <div class="fw-tool-apply">Kéo dài DPO một cách hợp lý — giữ tiền mặt trong tay lâu hơn mà không phá vỡ quan hệ supplier</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Capital Allocation &amp; ROI</div>
+                <div class="fw-tool-desc">Phân bổ vốn theo ma trận sinh lời: ROI, Payback Period, IRR cho từng hạng mục đầu tư</div>
+                <div class="fw-tool-apply">Đầu tư đúng chỗ, đúng thời điểm — tránh dàn trải nguồn lực vào những thứ không sinh tiền</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">13-Week Cash Forecast</div>
+                <div class="fw-tool-desc">Dự báo dòng tiền chi tiết theo từng tuần trong 13 tuần tới — rolling forecast cập nhật liên tục</div>
+                <div class="fw-tool-apply">Chủ động phát hiện "điểm thiếu tiền" trước 4–8 tuần — có đủ thời gian xử lý không khủng hoảng</div>
+              </div>
+            </div>
+            <div class="fw-note-box"><strong>💡 Làm rõ về "Đầu tư":</strong> Khái niệm "Investment" cần được cụ thể hóa thành <em>Capital Allocation &amp; ROI</em> — tức là quyết định đồng tiền nào đầu tư vào đâu, với kỳ vọng sinh lời như thế nào. Đây là kỹ năng tư duy tài chính, không chỉ là hành động đầu tư đơn thuần.</div>
+          </div>
+        </div>
+
+        <!-- GOAL 4: MỐI QUAN HỆ -->
+        <div class="acc-item">
+          <div class="acc-header" data-idx="3">
+            <div class="acc-header-left">
+              <span class="acc-goal-icon">🤝</span>
+              <div>
+                <div class="acc-goal-name">Mục Tiêu 4 — Mối Quan Hệ Hòa Hợp</div>
+                <div class="acc-goal-sub">Stakeholder Map · CX/EX/SRM · OKR · Feedback SBI</div>
+              </div>
+            </div>
+            <span class="acc-chevron">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="fw-label lbl-dci">Góc nhìn DCI — 10 Hạt Giống Tốt với 5 Cánh Sao</div>
+            <div class="fw-dci-box">
+              Mỗi mối quan hệ trong 5 Cánh Sao là một mảnh đất để gieo hạt. 10 Hạt Giống Tốt không phải danh sách "kỹ năng mềm" — đây là hệ thống karma quan hệ: cho đi đúng loại giá trị, đúng đối tượng, đúng thời điểm. Quản trị hiện đại cung cấp công cụ để làm điều này một cách có hệ thống, đo lường được, không chỉ dựa vào cảm tính.
+            </div>
+            <div class="fw-label lbl-tools">Framework Quản Trị Hiện Đại</div>
+            <div class="fw-tools-grid">
+              <div class="fw-tool">
+                <div class="fw-tool-name">Stakeholder Mapping Matrix</div>
+                <div class="fw-tool-desc">Power/Interest Grid — phân loại 5 Cánh Sao theo mức độ ảnh hưởng và mức độ quan tâm đến doanh nghiệp</div>
+                <div class="fw-tool-apply">Ưu tiên đầu tư năng lượng và nguồn lực đúng đối tượng, đúng chiến lược tiếp cận</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">CX Framework</div>
+                <div class="fw-tool-desc">NPS (Net Promoter Score), CSAT, Customer Journey Map — đo lường và thiết kế trải nghiệm khách hàng có chủ đích</div>
+                <div class="fw-tool-apply">Tạo "khoảnh khắc WOW" tại điểm chạm quan trọng — chuyển khách hàng thành người giới thiệu</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">EX Framework</div>
+                <div class="fw-tool-desc">Employee Experience — vòng đời nhân viên: Attract, Onboard, Develop, Retain, Alumni với điểm đo eNPS</div>
+                <div class="fw-tool-apply">Xây văn hóa gắn kết bền vững — nhân sự trở thành đại sứ thương hiệu, không phải người làm thuê</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">SRM — Supplier Relationship</div>
+                <div class="fw-tool-desc">Phân cấp nhà cung cấp: Strategic / Preferred / Approved — và chiến lược phát triển từng tầng</div>
+                <div class="fw-tool-apply">Biến supplier tầng "Strategic" thành đối tác đồng hành dài hạn, không chỉ là người bán hàng</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">OKR</div>
+                <div class="fw-tool-desc">Objectives &amp; Key Results — mục tiêu táo bạo + kết quả then chốt có thể đo lường, triển khai theo quý</div>
+                <div class="fw-tool-apply">Căn chỉnh toàn bộ tổ chức hướng về một mục tiêu chung — phá vỡ silo giữa các phòng ban</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Feedback Framework — SBI</div>
+                <div class="fw-tool-desc">Situation → Behavior → Impact: mô hình phản hồi cụ thể, không phán xét, dễ tiếp nhận</div>
+                <div class="fw-tool-apply">Xây văn hóa phản hồi cởi mở — mọi người dám nói thật, lãnh đạo dám nghe thật</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOAL 5: NỘI TÂM AN YÊN -->
+        <div class="acc-item">
+          <div class="acc-header" data-idx="4">
+            <div class="acc-header-left">
+              <span class="acc-goal-icon">🧘</span>
+              <div>
+                <div class="acc-goal-name">Mục Tiêu 5 — Nội Tâm An Yên</div>
+                <div class="acc-goal-sub">EQ (Goleman) · Growth Mindset · GROW · Decision-Making · Resilience · Leadership Presence</div>
+              </div>
+            </div>
+            <span class="acc-chevron">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="fw-label lbl-dci">Góc nhìn DCI — Nền Tảng Gieo Hạt Từ Trường Năng Lượng Cao</div>
+            <div class="fw-dci-box">
+              Không có nội tâm ổn định, không thể gieo hạt từ trạng thái trong sáng. Mọi công cụ DCI — 4 Bước, 10 Hạt Giống Tốt, Thiền Cà Phê — đều yêu cầu một nền tảng tâm lý vững. Đây không phải mục tiêu "mềm" hay thứ yếu — đây là điều kiện tiên quyết để những mục tiêu 1–4 được thực hiện bền vững, không kiệt sức.
+            </div>
+            <div class="fw-label lbl-tools">Framework Quản Trị Hiện Đại</div>
+            <div class="fw-tools-grid">
+              <div class="fw-tool">
+                <div class="fw-tool-name">EQ Model — Goleman</div>
+                <div class="fw-tool-desc">5 thành phần: Tự nhận thức (Self-Awareness), Tự kiểm soát (Self-Regulation), Tự động lực (Motivation), Đồng cảm (Empathy), Kỹ năng xã hội (Social Skills)</div>
+                <div class="fw-tool-apply">Lãnh đạo từ bên trong ra bên ngoài — EQ cao là lợi thế cạnh tranh không thể sao chép</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Growth Mindset — Dweck</div>
+                <div class="fw-tool-desc">Fixed vs Growth Mindset — thất bại là dữ liệu, không phải bằng chứng về năng lực. Thần kinh học xác nhận: mindset có thể được rèn luyện</div>
+                <div class="fw-tool-apply">Đón nhận thách thức như cơ hội học hỏi — thoát khỏi vòng lặp tự bảo vệ bản thân</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">GROW Coaching Model</div>
+                <div class="fw-tool-desc">Goal → Reality → Options → Will — khung tự huấn luyện bản thân và dẫn dắt đội ngũ qua câu hỏi chất lượng</div>
+                <div class="fw-tool-apply">Chuyển từ "ra lệnh" sang "khơi mở" — đội nhóm tự tìm ra giải pháp, lãnh đạo không còn phải ôm hết</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Decision-Making Frameworks</div>
+                <div class="fw-tool-desc">Second-order thinking (hậu quả của hậu quả), Pre-mortem (giả định thất bại để phòng ngừa), 10/10/10 (cảm xúc sau 10 phút / 10 tháng / 10 năm)</div>
+                <div class="fw-tool-apply">Ra quyết định sáng suốt dưới áp lực — không bị cảm xúc ngắn hạn chi phối</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Resilience &amp; Stress Management</div>
+                <div class="fw-tool-desc">Window of Tolerance, HRV (Heart Rate Variability), Burnout Prevention — các công cụ duy trì trạng thái tối ưu</div>
+                <div class="fw-tool-apply">Duy trì hiệu suất cao bền vững — không phải sprint rồi crash, mà là marathon có nhịp điệu</div>
+              </div>
+              <div class="fw-tool">
+                <div class="fw-tool-name">Leadership Presence</div>
+                <div class="fw-tool-desc">Trạng thái lãnh đạo, năng lượng phòng họp, ngôn ngữ cơ thể, cách truyền cảm hứng — hiện diện như một lực kéo tự nhiên</div>
+                <div class="fw-tool-apply">Tạo ảnh hưởng tích cực không cần quyền lực cưỡng bức — người ta muốn theo, không phải phải theo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end accordion -->
+    </div><!-- end frameworks-section -->
+
+  </div>
+</section>
+
+<!-- ─── SECTION 3: CHUYỂN HÓA ─── -->
+<section id="transform">
+  <div class="container">
+    <div class="section-header">
+      <h2>Từ Rào Cản → Đến Chuyển Hóa</h2>
+      <p>Chân dung khách hàng mục tiêu: Doanh nghiệp doanh thu 10 tỷ+, nhân sự 10 người trở lên</p>
+    </div>
+    <table class="transform-table">
+      <thead>
+        <tr>
+          <th>Tiêu Chí</th>
+          <th>❌ Hiện Trạng (Rào Cản)</th>
+          <th>✅ Mục Tiêu (Chuyển Hóa)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-criteria">🧠 Nhận Thức</td>
+          <td class="col-before"><span>❌</span> Bế tắc trong vòng xoáy "thử và sai"; chưa hiểu quy luật hạt giống chi phối vận hành doanh nghiệp</td>
+          <td class="col-after"><span>✅</span> Làm chủ bộ công cụ nền tảng (The Pen, 4 Bước, 4 Luật) để ch��� động kiến tạo kết quả</td>
+        </tr>
+        <tr>
+          <td class="col-criteria">💛 Cảm Xúc</td>
+          <td class="col-before"><span>❌</span> Bối rối, mất niềm tin vào hệ thống; lo lắng về sự phát triển bền v���ng</td>
+          <td class="col-after"><span>✅</span> An tâm, hào hứng và có niềm tin tuyệt đối vào lộ trình thực hành 4 bước</td>
+        </tr>
+        <tr>
+          <td class="col-criteria">🌐 Xã Hội</td>
+          <td class="col-before"><span>❌</span> Quan hệ 5 Cánh Sao rời rạc, xung đột lợi ích hoặc thiếu gắn kết</td>
+          <td class="col-after"><span>✅</span> Mạng lưới Seed Partner hòa hợp — lòng biết ơn là văn hóa kinh doanh</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── SECTION 4: LỘ TRÌNH ─── -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lộ Trình Mentor 6 Tháng — Từ Nền Tảng Đến Chuyển Hóa</h2>
+      <p>Mỗi giai đoạn được thiết kế có chủ đích — từ nhận thức → thực hành sâu → chuyển hóa hệ thống</p>
+    </div>
+    <div class="timeline-grid">
+
+      <div class="month-card m1">
+        <div class="month-header">
+          <div class="month-num">Tháng 1</div>
+          <h3>Nền Tảng & Định Hướng</h3>
+          <div class="month-badge">Offline T1</div>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>Đánh giá hiện trạng doanh nghiệp</li>
+            <li>Thiết lập mục tiêu 3 tháng → 5 năm</li>
+            <li>The Pen — Câu chuyện Cây Bút</li>
+            <li>4 Bước Gieo Hạt — 3 Mảnh Đất</li>
+            <li>4 Luật Nhân Quả</li>
+            <li>Wookluk & Bookduk</li>
+          </ul>
+        </div>
+        <div class="month-footer">T1: Offline 180 phút &nbsp;|&nbsp; T2–4: Online 120 phút</div>
+      </div>
+
+      <div class="month-card m2">
+        <div class="month-header">
+          <div class="month-num">Tháng 2</div>
+          <h3>5 Cánh Sao & Lòng Biết Ơn</h3>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>Phân tích hiện trạng 5 Cánh Sao</li>
+            <li>Thực hành lòng biết ơn chuyên sâu</li>
+            <li>Thiền Cà Phê Vi Tế — tài chính</li>
+            <li>10 Hạt Giống Tốt (Buổi 1)</li>
+          </ul>
+        </div>
+        <div class="month-footer">4 buổi Online × 120 phút</div>
+      </div>
+
+      <div class="month-card m3">
+        <div class="month-header">
+          <div class="month-num">Tháng 3</div>
+          <h3>10 Hạt Giống Tốt (Sâu Hóa)</h3>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>10 Hạt Giống Tốt Buổi 2</li>
+            <li>10 Hạt Giống Tốt Buổi 3</li>
+            <li>10 Hạt Giống Tốt Buổi 4</li>
+            <li>10 Hạt Giống Tốt Buổi 5</li>
+          </ul>
+        </div>
+        <div class="month-footer">4 buổi Online × 120 phút</div>
+      </div>
+
+      <div class="month-card m4">
+        <div class="month-header">
+          <div class="month-num">Tháng 4</div>
+          <h3>Tích Hợp & Kiểm Toán</h3>
+          <div class="month-badge audit">Audit Chặng 1</div>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>Lập kế hoạch 10 HGT × 4 Bước</li>
+            <li>4 Sức Mạnh — loại bỏ hạt giống xấu</li>
+            <li>Hạt Giống Thô — tăng tốc</li>
+            <li>4 Bông Hoa — đo lường tài chính</li>
+            <li>Đánh giá tài chính 3 tháng qua</li>
+          </ul>
+        </div>
+        <div class="month-footer">4 buổi Online × 120 phút</div>
+      </div>
+
+      <div class="month-card m5">
+        <div class="month-header">
+          <div class="month-num">Tháng 5</div>
+          <h3>Quản Trị Hiện Đại</h3>
+          <div class="month-badge">Offline T2</div>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>4 Ưu Tiên thực hành</li>
+            <li>Báo cáo tài chính thực chiến</li>
+            <li>Quản trị dòng tiền</li>
+            <li>Tối ưu cấu trúc sản phẩm</li>
+            <li>Hoàn thiện tài chính doanh nghiệp</li>
+          </ul>
+        </div>
+        <div class="month-footer">T2: Offline 180 phút &nbsp;|&nbsp; T1,3,4: Online 120 phút</div>
+      </div>
+
+      <div class="month-card m6">
+        <div class="month-header">
+          <div class="month-num">Tháng 6</div>
+          <h3>Tổng Kết & Tốt Nghiệp</h3>
+          <div class="month-badge">Offline T4</div>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>Công cụ tài chính hiện đại (tiếp)</li>
+            <li>Đo lường tăng trưởng 6 tháng</li>
+            <li>Tổng kết thực hành kiên trì</li>
+            <li>Vinh danh học viên xuất sắc</li>
+            <li>Cơ hội trở thành TA</li>
+          </ul>
+        </div>
+        <div class="month-footer">T4: Offline 180 phút — Lễ Tốt Nghiệp 🎓</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 5: 5 CÁNH SAO ─── -->
+<section id="stars">
+  <div class="container">
+    <div class="section-header">
+      <h2>Ứng Dụng 10 Hạt Giống Tốt Cho 5 Cánh Sao Kinh Doanh</h2>
+      <p>Sự thịnh vượng bền vững chỉ đến khi hệ sinh thái quanh doanh nghiệp được nuôi dưỡng đồng bộ</p>
+    </div>
+    <table class="stars-table">
+      <thead>
+        <tr>
+          <th>Đối Tác</th>
+          <th>Giải Pháp DCI & Quản Trị Hiện Đại</th>
+          <th>Giá Trị Chiến Lược</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="partner-name"><span class="partner-icon">🏦</span> Nhà Đầu Tư</div></td>
+          <td>Cam kết chi trả lợi nhuận cao hơn kỳ vọng; minh bạch thông tin tuyệt đối</td>
+          <td>Gieo hạt hào phóng để thu hút nguồn lực và vốn lớn hơn</td>
+        </tr>
+        <tr>
+          <td><div class="partner-name"><span class="partner-icon">🤝</span> Đối Tác Kinh Doanh</div></td>
+          <td>Trao quyền & nâng tầm vị thế đối tác; tạo điều kiện thuận lợi tối đa</td>
+          <td>Xây vị thế lãnh đạo qua hỗ trợ thay vì cạnh tranh</td>
+        </tr>
+        <tr>
+          <td><div class="partner-name"><span class="partner-icon">🏭</span> Nhà Cung Cấp</div></td>
+          <td>Không ép giá; chủ động chừa biên lợi nhuận để họ cải tiến chất lượng</td>
+          <td>Đảm bảo chất lượng đầu vào bền vững — hạt giống lợi nhuận gốc</td>
+        </tr>
+        <tr>
+          <td><div class="partner-name"><span class="partner-icon">👨‍💼</span> Nhân Viên</div></td>
+          <td>Đào tạo chuyên môn + nâng tầm năng lực tài chính cá nhân cho họ</td>
+          <td>Biến nhân sự thành mảnh đất màu mỡ để gieo hạt tăng trưởng</td>
+        </tr>
+        <tr>
+          <td><div class="partner-name"><span class="partner-icon">🛍️</span> Khách Hàng</div></td>
+          <td>Thiết kế hành trình trải nghiệm "ngoài sự tưởng tượng"; bán giải pháp, không bán sản phẩm</td>
+          <td>Tạo trung thành tuyệt đối — hạt giống doanh thu bùng nổ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── SECTION 6: CHỈ SỐ VẬN HÀNH ─── -->
+<section id="metrics">
+  <div class="container">
+    <div class="section-header">
+      <h2>Chỉ Số Vận Hành Chương Trình</h2>
+      <p>Các con số định hình quy mô và mục tiêu tài chính của mỗi khóa học</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-val">14–20</div>
+        <div class="metric-label">Học Viên / Lớp</div>
+        <div class="metric-desc">Quy mô lý tưởng để đảm bảo chất lượng tương tác và trải nghiệm học sâu</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">65 Triệu</div>
+        <div class="metric-label">Học Phí / Học Viên</div>
+        <div class="metric-desc">Giá trị đầu tư cho 6 tháng chuyển hóa toàn diện tư duy và hệ thống</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">910 Triệu+</div>
+        <div class="metric-label">Doanh Thu / Khóa</div>
+        <div class="metric-desc">Tính với 14 học viên — mục tiêu doanh thu tối thiểu mỗi khóa</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">3</div>
+        <div class="metric-label">Buổi Offline</div>
+        <div class="metric-desc">Khai giảng + Giữa khóa + Tốt nghiệp — 3 điểm neo cảm xúc quan trọng</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 7: ĐỘI NGŨ ─── -->
+<section id="team">
+  <div class="container">
+    <div class="section-header">
+      <h2>Đội Ngũ Triển Khai</h2>
+      <p>Những người đồng hành và dẫn dắt học viên xuyên suốt hành trình 6 tháng</p>
+    </div>
+    <div class="team-section">
+      <div class="team-group">
+        <div class="team-group-title">
+          <span class="grp-icon">👨‍🏫</span>
+          Giảng Viên
+        </div>
+        <div class="team-members">
+          <span class="member-chip">Elaine</span>
+          <span class="member-chip">Yumi</span>
+          <span class="member-chip">Boul</span>
+          <span class="member-chip">Thầy Bình</span>
+          <span class="member-chip">Cherry</span>
+        </div>
+      </div>
+      <div class="team-group">
+        <div class="team-group-title">
+          <span class="grp-icon">🌱</span>
+          Trợ Giảng — Seed Guardians
+        </div>
+        <div class="team-members">
+          <span class="member-chip">Ái</span>
+          <span class="member-chip">Linh</span>
+          <span class="member-chip">Vân Anh</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">KindSight <span>Academy</span></div>
+  <p class="footer-tagline">"Gieo Hạt Thịnh Vượng — Gặt Hái Thành Công Bền Vững"</p>
+  <p class="footer-copy">© 2026 KindSight Academy. Tài liệu nội bộ — Bản nháp để duyệt.</p>
+</footer>
+
+<script>
+  // ─── ACCORDION ───
+  document.querySelectorAll('.acc-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.closest('.acc-item');
+      const body = item.querySelector('.acc-body');
+      const chevron = header.querySelector('.acc-chevron');
+      const isOpen = body.classList.contains('is-open');
+
+      // Close all others
+      document.querySelectorAll('.acc-body.is-open').forEach(b => {
+        b.classList.remove('is-open');
+        b.closest('.acc-item').querySelector('.acc-header').classList.remove('is-open');
+        b.closest('.acc-item').querySelector('.acc-chevron').classList.remove('is-open');
+      });
+
+      // Toggle current
+      if (!isOpen) {
+        body.classList.add('is-open');
+        header.classList.add('is-open');
+        chevron.classList.add('is-open');
+        // Smooth scroll so the opened panel is visible
+        setTimeout(() => header.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      }
+    });
+  });
+
+  // ─── SMOOTH SCROLL & ACTIVE NAV HIGHLIGHT ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.background = a.getAttribute('href') === '#' + current ? 'rgba(255,255,255,0.15)' : '';
+      a.style.color = a.getAttribute('href') === '#' + current ? '#fff' : '';
+    });
+  });
+</script>
+</body>
+</html>
